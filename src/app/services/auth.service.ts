@@ -124,7 +124,7 @@ export class AuthService {
       console.log('✅ Successfully cleared localStorage during logout');
     } catch (e) {
       console.error('❌ Failed to clear localStorage during logout:', e);
-      console.error('Error type:', e.name, 'Message:', e.message);
+      
     }
     
     this.currentUserSubject.next(null);
@@ -213,11 +213,10 @@ export class AuthService {
       } catch (e) {
         console.error('❌ Failed to store auth data in localStorage:', e);
         // Add more details about the error
-        console.error('Error type:', e.name, 'Message:', e.message);
+        
       }
     } catch (e) {
-      console.error('❌ Error in handleAuthResponse:', e);
-      console.error('Error type:', e.name, 'Message:', e.message);
+      console.error('❌ Error in handleAuthResponse:');
     }
   }
 }
