@@ -2,6 +2,9 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
 
+
+## BACKEND
+    located [here](https://github.com/jminterwebs/smsBackend)
 ## Development server
 
 
