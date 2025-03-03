@@ -2,6 +2,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environment';
+
 
 export interface MessageData {
   numberInput: number;
@@ -23,7 +25,7 @@ export interface Message extends MessageData {
   providedIn: 'root'  // This is important for root-level services
 })
 export class MessageService {
-  private apiUrl = 'http://localhost:3000/api/v1/messages'; // Match the auth service URL structure
+  private apiUrl = `${environment.apiUrl}/v1/messages`; // Match the auth service URL structure
 
   constructor(private http: HttpClient) { }
 
