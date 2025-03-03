@@ -1,16 +1,17 @@
 // src/app/components/login/login.component.ts
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
-  standalone: true, // This indicates it's a standalone component
+  standalone: true,
   imports: [
-    CommonModule,    // For common directives like *ngIf
-    ReactiveFormsModule  // Import for FormGroup directive
+    CommonModule,    
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']

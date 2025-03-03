@@ -1,0 +1,168 @@
+// Registration page styles
+.register-container {
+    max-width: 480px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #333;
+      font-weight: 600;
+      font-size: 1.8rem;
+    }
+    
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+  }
+  
+  // Form elements
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    
+    label {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 0.5rem;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: all 0.2s ease-in-out;
+      
+      &:focus {
+        outline: none;
+        border-color: #4a90e2;
+        box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+      }
+      
+      &.ng-invalid.ng-touched {
+        border-color: #e57373;
+      }
+    }
+    
+    .error-message {
+      font-size: 0.85rem;
+      color: #e53935;
+      margin-top: 0.5rem;
+      display: block;
+    }
+  }
+  
+  // Submit button
+  .submit-button {
+    margin-top: 1rem;
+    padding: 0.9rem;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    
+    &:hover:not(:disabled) {
+      background-color: #3a7bc8;
+    }
+    
+    &:disabled {
+      background-color: #a0c3e8;
+      cursor: not-allowed;
+    }
+  }
+  
+  // Error alert
+  .error-alert {
+    margin-top: 1rem;
+    padding: 0.8rem 1rem;
+    background-color: #ffebee;
+    border-left: 4px solid #e53935;
+    color: #c62828;
+    border-radius: 4px;
+  }
+  
+  // Form footer
+  .form-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+    color: #666;
+    
+    a {
+      color: #4a90e2;
+      text-decoration: none;
+      font-weight: 500;
+      
+      &:hover {
+        text-decoration: underline;
+        color: #3a7bc8;
+      }
+    }
+  }
+  
+  // Animation for loading state
+  @keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+  }
+  
+  .submit-button:disabled {
+    animation: pulse 1.5s infinite;
+  }
+  
+  // Responsive adjustments
+  @media (max-width: 520px) {
+    .register-container {
+      margin: 1rem;
+      padding: 1.5rem;
+    }
+  }
+  
+  // Add a subtle animation when the form fields are focused
+  .form-control:focus {
+    transform: translateY(-2px);
+  }
+  
+  // Add password strength indicator styles
+  .password-strength {
+    margin-top: 0.5rem;
+    height: 4px;
+    background-color: #f5f5f5;
+    border-radius: 2px;
+    overflow: hidden;
+    
+    .strength-meter {
+      height: 100%;
+      transition: width 0.3s ease, background-color 0.3s ease;
+      
+      &.weak {
+        width: 33.33%;
+        background-color: #e53935;
+      }
+      
+      &.medium {
+        width: 66.66%;
+        background-color: #ffb74d;
+      }
+      
+      &.strong {
+        width: 100%;
+        background-color: #4caf50;
+      }
+    }
+  }

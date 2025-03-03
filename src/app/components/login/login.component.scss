@@ -1,38 +1,174 @@
+// Login page styles
 .login-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
+  max-width: 480px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-weight: 600;
+    font-size: 1.8rem;
   }
-  .form-group {
-    margin-bottom: 15px;
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
   }
+}
+
+// Form elements
+.form-group {
+  display: flex;
+  flex-direction: column;
+  
+  label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 0.5rem;
+  }
+  
   .form-control {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.2s ease-in-out;
+    
+    &:focus {
+      outline: none;
+      border-color: #4a90e2;
+      box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+    }
+    
+    &.ng-invalid.ng-touched {
+      border-color: #e57373;
+    }
   }
-  .button {
-    padding: 10px 15px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  .button:hover {
-    background-color: #45a049;
-  }
+  
   .error-message {
-    color: #f44336;
-    margin-top: 5px;
+    font-size: 0.85rem;
+    color: #e53935;
+    margin-top: 0.5rem;
+    display: block;
   }
-  .success-message {
-    color: #4CAF50;
-    margin-top: 5px;
+}
+
+// Submit button
+.button.submit {
+  margin-top: 1rem;
+  padding: 0.9rem;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 100%;
+  
+  &:hover {
+    background-color: #3a7bc8;
   }
-  .storage-test {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
+  
+  &:disabled {
+    background-color: #a0c3e8;
+    cursor: not-allowed;
   }
+}
+
+// Form error message
+.error-message {
+  font-size: 0.85rem;
+  color: #e53935;
+  margin-top: 0.5rem;
+  
+  &:not(.form-group .error-message) {
+    margin-top: 1rem;
+    padding: 0.8rem 1rem;
+    background-color: #ffebee;
+    border-left: 4px solid #e53935;
+    color: #c62828;
+    border-radius: 4px;
+  }
+}
+
+// Form footer
+.form-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+  color: #666;
+  
+  a {
+    color: #4a90e2;
+    text-decoration: none;
+    font-weight: 500;
+    
+    &:hover {
+      text-decoration: underline;
+      color: #3a7bc8;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 520px) {
+  .login-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+}
+
+// Add a subtle animation when the form fields are focused
+.form-control:focus {
+  transform: translateY(-2px);
+}
+
+// Add a small animation for the login button
+.button.submit {
+  position: relative;
+  overflow: hidden;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+  }
+  
+  &:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
