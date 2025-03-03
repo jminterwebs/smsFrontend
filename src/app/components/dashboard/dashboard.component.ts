@@ -11,7 +11,7 @@ import { PhoneNumberPipe } from '../../pipes/phone-number.pipe';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterLink, ReactiveFormsModule, PhoneNumberPipe],
+  imports: [CommonModule, ReactiveFormsModule, PhoneNumberPipe],
   // If your service isn't provided at root, add it here
   // providers: [MessageService],
   templateUrl: './dashboard.component.html',
