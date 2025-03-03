@@ -1,12 +1,15 @@
-
 <div class="dashboard-container"> 
-    <div class="dashboard-content">         
+  <div class="dashboard-content">
+    <h2 class="dashboard-title">Welcome {{currentUser?.name || 'User'}}</h2>
+    
+    <div class="dashboard-grid">
+      <!-- Message Creation Form -->
       <div class="card form-card">
         <h3>Create New Message</h3>
         
         <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <label for="numberInput">Number Input</label>
+            <label for="numberInput">Phone Number</label>
             <input 
               type="number" 
               id="numberInput" 
@@ -15,12 +18,12 @@
               min="1">
             <div *ngIf="submitted && messageForm.get('numberInput')?.errors" class="error-message">
               <span *ngIf="messageForm.get('numberInput')?.errors?.['required']">Number is required</span>
-              <span *ngIf="messageForm.get('numberInput')?.errors?.['min']">Number must be at least 1</span>
+              <span *ngIf="messageForm.get('numberInput')?.errors?.['min']">Number must be at form-control  1</span>
             </div>
           </div>
           
           <div class="form-group">
-            <label for="messageText">Your Message</label>
+            <label for="messageText">Message</label>
             <textarea 
               id="messageText" 
               formControlName="messageText" 
@@ -33,17 +36,50 @@
             </div>
           </div>
           
-          <button type="submit" class="button submit">Submit Message</button>
+          <button type="submit" class="button submit" [disabled]="isLoading">
+            <span *ngIf="isLoading">
+              <span class="loader"></span> Submitting...
+            </span>
+            <span *ngIf="!isLoading">Submit Message</span>
+          </button>
         </form>
         
         <div *ngIf="submitSuccess" class="success-message">
           Your message has been submitted successfully!
         </div>
+        
+        <div *ngIf="errorMessage" class="error-message global-error">
+          {{ errorMessage }}
+        </div>
       </div>
       
-      <div class="actions">
-        <a routerLink="/" class="button">Home</a>
-        <button (click)="logout()" class="button logout">Logout</button>
+      <!-- Messages List -->
+      <div class="card messages-card">
+        <h3>Your Messages</h3>
+        
+        <div *ngIf="isLoading && userMessages.length === 0" class="loading-state">
+          <span class="loader"></span>
+          <p>Loading your messages...</p>
+        </div>
+        
+        <div *ngIf="!isLoading && userMessages.length === 0" class="empty-state">
+          <div class="empty-icon">📝</div>
+          <p>You haven't sent any messages yet.</p>
+          <p class="empty-hint">Create a new message using the form to get started.</p>
+        </div>
+        
+        <div *ngIf="userMessages.length > 0" class="messages-list">
+          <div *ngFor="let message of userMessages" class="message-item">
+            <div class="message-header">
+              <span class="message-number">{{ message.from | phoneNumber }}</span>
+              <span class="message-date">{{ formatDate(message.created_at) }}</span>
+            </div>
+            <div class="message-content">
+              {{message.message_text}}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</div>

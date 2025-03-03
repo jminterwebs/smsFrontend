@@ -1,24 +1,26 @@
 // src/app/components/login/login.component.ts
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-// Make sure these imports are present for forms
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  // The important part - add ReactiveFormsModule to the imports array
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  standalone: true, // This indicates it's a standalone component
+  imports: [
+    CommonModule,    // For common directives like *ngIf
+    ReactiveFormsModule  // Import for FormGroup directive
+  ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  errorMessage = '';
-  loading = false;
+  submitted = false;
+  error = '';
+  storageTestResult = '';
+  storageTestSuccess = false;
 
   constructor(
     private fb: FormBuilder,
@@ -32,24 +34,27 @@ export class LoginComponent {
   }
 
   onSubmit(): void {
+    this.submitted = true;
+    this.error = '';
+    
     if (this.loginForm.invalid) {
       return;
     }
-
-    this.loading = true;
-    this.errorMessage = '';
     
     const { email, password } = this.loginForm.value;
     
     this.authService.login(email, password).subscribe({
-      next: (response) => {
-        // After successful login, navigate to the home or dashboard page
-        this.router.navigate(['/dashboard']);  // Change this to your desired page
+      next: () => {
+        this.router.navigate(['/dashboard']);
       },
-      error: (error: HttpErrorResponse) => {
-        this.errorMessage = error.error?.status?.message || 'Login failed. Please try again.';
-        this.loading = false;
+      error: (error) => {
+        if (error.error && error.error.message) {
+          this.error = error.error.message;
+        } else {
+          this.error = 'Login failed. Please check your credentials and try again.';
+        }
       }
     });
   }
+
 }

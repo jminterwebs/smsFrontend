@@ -52,6 +52,7 @@ export class RegisterComponent {
     const userData = {
       name: this.registerForm.get('name')?.value,
       email: this.registerForm.get('email')?.value,
+      phone: this.registerForm.get('phone')?.value,
       password: this.registerForm.get('password')?.value,
       password_confirmation: this.registerForm.get('passwordConfirmation')?.value
     };
