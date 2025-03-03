@@ -1,0 +1,49 @@
+
+<div class="dashboard-container"> 
+    <div class="dashboard-content">         
+      <div class="card form-card">
+        <h3>Create New Message</h3>
+        
+        <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="numberInput">Number Input</label>
+            <input 
+              type="number" 
+              id="numberInput" 
+              formControlName="numberInput" 
+              class="form-control"
+              min="1">
+            <div *ngIf="submitted && messageForm.get('numberInput')?.errors" class="error-message">
+              <span *ngIf="messageForm.get('numberInput')?.errors?.['required']">Number is required</span>
+              <span *ngIf="messageForm.get('numberInput')?.errors?.['min']">Number must be at least 1</span>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="messageText">Your Message</label>
+            <textarea 
+              id="messageText" 
+              formControlName="messageText" 
+              class="form-control"
+              rows="5"
+              placeholder="Enter your message here..."></textarea>
+            <div *ngIf="submitted && messageForm.get('messageText')?.errors" class="error-message">
+              <span *ngIf="messageForm.get('messageText')?.errors?.['required']">Message is required</span>
+              <span *ngIf="messageForm.get('messageText')?.errors?.['minlength']">Message must be at least 10 characters</span>
+            </div>
+          </div>
+          
+          <button type="submit" class="button submit">Submit Message</button>
+        </form>
+        
+        <div *ngIf="submitSuccess" class="success-message">
+          Your message has been submitted successfully!
+        </div>
+      </div>
+      
+      <div class="actions">
+        <a routerLink="/" class="button">Home</a>
+        <button (click)="logout()" class="button logout">Logout</button>
+      </div>
+    </div>
+  </div>

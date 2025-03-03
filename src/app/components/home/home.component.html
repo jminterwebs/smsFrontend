@@ -1,0 +1,27 @@
+<div class="home-container">
+    <header>
+      <h1>Welcome to Your Application</h1>
+      <div class="user-info" *ngIf="currentUser">
+        <span>Logged in as: {{ currentUser.name || currentUser.email }}</span>
+        <button (click)="logout()" class="logout-button">Logout</button>
+      </div>
+    </header>
+  
+    <div class="content">
+      <div *ngIf="currentUser" class="welcome-message">
+        <h2>Hello, {{ currentUser.name || 'User' }}!</h2>
+        <p>You are successfully authenticated.</p>
+        <p>This is your application's home page.</p>
+      </div>
+      
+      <div class="protected-content">
+        <h3>Protected Content</h3>
+        <p>This section is only visible to authenticated users.</p>
+        <p>Your account details:</p>
+        <ul *ngIf="currentUser">
+          <li><strong>Email:</strong> {{ currentUser.email }}</li>
+          <li><strong>ID:</strong> {{ currentUser.id }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
